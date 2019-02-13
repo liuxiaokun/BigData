@@ -30,6 +30,10 @@
 export HADOOP_HOME=/opt/hadoop-3.1.2
 export PATH=$PATH:$HADOOP_HOME/bin
  ```
+ 使生效
+```
+  source /etc/profile
+```
 1. 开始更改配置文件
   修改第一个hadoop-env.sh, 把# export JAVA_HOME=的注释打开,并设置值。
  ```
