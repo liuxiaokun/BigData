@@ -133,11 +133,48 @@ HADOOP_SECURE_DN_USER=hdfs
 HDFS_NAMENODE_USER=root
 HDFS_SECONDARYNAMENODE_USER=root
 ```
+重新启动 ./start-dfs.sh
+
 4. 启动yarn
 ```
   cd /opt/hadoop-3.1.2/sbin/
   ./start-yarn.sh
 ```
+报错：
+```
+[root@localhost sbin]# ./start-yarn.sh 
+Starting resourcemanager
+ERROR: Attempting to operate on yarn resourcemanager as root
+ERROR: but there is no YARN_RESOURCEMANAGER_USER defined. Aborting operation.
+Starting nodemanagers
+ERROR: Attempting to operate on yarn nodemanager as root
+ERROR: but there is no YARN_NODEMANAGER_USER defined. Aborting operation.
 
+```
+是因为缺少用户定义造成的，所以分别编辑开始和关闭脚本 .
+```
+  vim start-yarn.sh
+  vim stop-yarn.sh
+  
+  #头上新增
+  YARN_RESOURCEMANAGER_USER=root
+  HADOOP_SECURE_DN_USER=yarn
+  YARN_NODEMANAGER_USER=root
+```
+重新启动 ./start-yarn.sh
+
+5. 验证
+```
+jps
+57265 NameNode
+57412 DataNode
+57637 SecondaryNameNode
+58599 Jps
+58125 ResourceManager
+58270 NodeManager
+
+#返回信息
+
+```
 # 运行wordcount程序
 
