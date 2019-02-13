@@ -98,7 +98,12 @@ export PATH=$PATH:$HADOOP_HOME/bin
 ```
 hdfs namenode -format
 ```
-2. 启动hdfs
+2. 设定本机的无密码ssh登陆
+```
+  ssh-keygen -t rsa
+  cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+3. 启动hdfs
 ```
   cd /opt/hadoop-3.1.2/sbin/
   ./start-dfs.sh
@@ -128,7 +133,7 @@ HADOOP_SECURE_DN_USER=hdfs
 HDFS_NAMENODE_USER=root
 HDFS_SECONDARYNAMENODE_USER=root
 ```
-3. 启动yarn
+4. 启动yarn
 ```
   cd /opt/hadoop-3.1.2/sbin/
   ./start-yarn.sh
