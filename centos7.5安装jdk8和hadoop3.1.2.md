@@ -1,23 +1,34 @@
 # 安装JDK1.8
+
+解压安装
 ```
   cd /opt
   tar zxvf jdk-8u201-linux-x64.tar.gz
   vim /etc/profile
-  
+```
+配置环境变量 vim /etc/profile
+```
   #新增
   export JAVA_HOME=/opt/jdk1.8.0_201
   export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib
   export PATH=$JAVA_HOME/bin:$PATH
   #保存退出
-  
+```
+使生效
+```
   source /etc/profile
-
 ```
 # 安装Hadoop3.1.2
 ```
   cd /opt
   tar zxvf hadoop-3.1.2.tar.gz
   cd /opt/hadoop-3.1.2/etc/hadoop/
+ ```
+ 配置环境变量 vim /etc/profile
+ ```
+ #hadoop
+export HADOOP_HOME=/opt/hadoop-3.1.2
+export PATH=$PATH:$HADOOP_HOME/bin
  ```
 1. 开始更改配置文件
   修改第一个hadoop-env.sh, 把# export JAVA_HOME=的注释打开,并设置值。
