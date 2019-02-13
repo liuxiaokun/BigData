@@ -57,7 +57,8 @@ export PATH=$PATH:$HADOOP_HOME/bin
 
 ```
 3. 修改hdfs-site.xml，修改配置如下
-```<configuration>
+```
+<configuration>
     <!-- 设置hdfs副本数量 -->
     <property>
         <name>dfs.replication</name>
