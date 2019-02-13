@@ -176,5 +176,75 @@ jps
 ```
 HDFS的管理界面：http://localhost:9870
 MR的管理界面：http://localhost:8088
+
 # 运行wordcount程序
+
+1. 进入hadoop安装目录中的share
+```
+cd /opt/hadoop-3.1.2/share/hadoop/mapreduce
+ls -al
+
+总用量 5576
+-rw-r--r--. 1 1001 1002  612132 1月  29 10:58 hadoop-mapreduce-client-app-3.1.2.jar
+-rw-r--r--. 1 1001 1002  804002 1月  29 10:58 hadoop-mapreduce-client-common-3.1.2.jar
+-rw-r--r--. 1 1001 1002 1655008 1月  29 10:58 hadoop-mapreduce-client-core-3.1.2.jar
+-rw-r--r--. 1 1001 1002  215288 1月  29 10:58 hadoop-mapreduce-client-hs-3.1.2.jar
+-rw-r--r--. 1 1001 1002   45332 1月  29 10:58 hadoop-mapreduce-client-hs-plugins-3.1.2.jar
+-rw-r--r--. 1 1001 1002   85391 1月  29 10:58 hadoop-mapreduce-client-jobclient-3.1.2.jar
+-rw-r--r--. 1 1001 1002 1659421 1月  29 10:58 hadoop-mapreduce-client-jobclient-3.1.2-tests.jar
+-rw-r--r--. 1 1001 1002  126141 1月  29 10:58 hadoop-mapreduce-client-nativetask-3.1.2.jar
+-rw-r--r--. 1 1001 1002   97153 1月  29 10:58 hadoop-mapreduce-client-shuffle-3.1.2.jar
+-rw-r--r--. 1 1001 1002   57647 1月  29 10:58 hadoop-mapreduce-client-uploader-3.1.2.jar
+-rw-r--r--. 1 1001 1002  316380 1月  29 10:58 hadoop-mapreduce-examples-3.1.2.jar
+drwxr-xr-x. 2 1001 1002    4096 1月  29 11:35 jdiff
+drwxr-xr-x. 2 1001 1002      57 1月  29 11:35 lib
+drwxr-xr-x. 2 1001 1002      30 1月  29 11:35 lib-examples
+drwxr-xr-x. 2 1001 1002    4096 1月  29 11:35 sources
+```
+hadoop-mapreduce-examples-3.1.2.jar为样例程序。
+
+2. 创建相应目录，/data/wordcount用来存放Hadoop自带的WordCount例子的数据文件，运行这个MapReduce任务的结果输出到/output/wordcount目录中。
+hadoop fs -mkdir -p /data/wordcount
+hadoop fs -mkdir -p /output/
+
+3. 新建本地文件，vi words.txt
+```
+hello tom
+hello kitty
+hello world
+hello tom
+```
+4. 把words.txt上传到HDFS中
+```
+hadoop fs -put /opt/hadoop-3.1.2/share/hadoop/mapreduce/words.txt /data/wordcount
+```
+查看hdfs中文件情况
+```
+hadoop fs -ls /data/wordcount
+```
+5.运行
+```
+hadoop jar hadoop-mapreduce-examples-3.1.2.jar wordcount /data/wordcount /output/wordcount
+```
+报错：
+```
+错误: 找不到或无法加载主类 org.apache.hadoop.mapreduce.v2.app.MRAppMaster
+```
+解决：
+把hadoop classpath返回得值配置到yarn-site.xml文件中
+```
+vim /opt/hadoop-3.1.2/etc/hadoop/yarn-site.xml
+
+<configuration>
+    <property>
+        <name>yarn.application.classpath</name>
+        <value>输入刚才返回的Hadoop classpath路径</value>
+    </property>
+</configuration>
+```
+重新执行
+
+
+
+
 
