@@ -93,5 +93,46 @@ export PATH=$PATH:$HADOOP_HOME/bin
     </property>
 </configuration>
 ```
+# 启动hadoop
+1. 格式化hadoop，进入目录：/opt/hadoop-3.1.2/etc/hadoop，执行下列命令即可
+```
+hdfs namenode -format
+```
+2. 启动hdfs
+```
+  cd /opt/hadoop-3.1.2/sbin/
+  ./start-dfs.sh
+```
+报错：
+```
+[root@localhost sbin]# ./start-dfs.sh 
+Starting namenodes on [localhost]
+ERROR: Attempting to operate on hdfs namenode as root
+ERROR: but there is no HDFS_NAMENODE_USER defined. Aborting operation.
+Starting datanodes
+ERROR: Attempting to operate on hdfs datanode as root
+ERROR: but there is no HDFS_DATANODE_USER defined. Aborting operation.
+Starting secondary namenodes [localhost.localdomain]
+ERROR: Attempting to operate on hdfs secondarynamenode as root
+ERROR: but there is no HDFS_SECONDARYNAMENODE_USER defined. Aborting operation.
 
+```
+是因为缺少用户定义造成的，所以分别编辑开始和关闭脚本 
+```
+vim start-dfs.sh
+vim stop-dfs.sh 
+
+#头上新增
+HDFS_DATANODE_USER=root
+HADOOP_SECURE_DN_USER=hdfs
+HDFS_NAMENODE_USER=root
+HDFS_SECONDARYNAMENODE_USER=root
+```
+3. 启动yarn
+```
+  cd /opt/hadoop-3.1.2/sbin/
+  ./start-yarn.sh
+```
+
+# 运行wordcount程序
 
