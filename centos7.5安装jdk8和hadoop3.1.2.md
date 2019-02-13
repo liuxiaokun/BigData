@@ -166,15 +166,15 @@ ERROR: but there is no YARN_NODEMANAGER_USER defined. Aborting operation.
 5. 验证
 ```
 jps
+#返回信息
 57265 NameNode
 57412 DataNode
 57637 SecondaryNameNode
 58599 Jps
 58125 ResourceManager
 58270 NodeManager
-
-#返回信息
-
 ```
+HDFS的管理界面：http://localhost:9870
+MR的管理界面：http://localhost:8088
 # 运行wordcount程序
 
