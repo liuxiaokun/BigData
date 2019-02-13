@@ -244,6 +244,14 @@ vim /opt/hadoop-3.1.2/etc/hadoop/yarn-site.xml
 ```
 重新执行
 
+6. 查看运行结果
+```
+hadoop fs -text /output/wordcount/part-r-00000
+```
+或者
+http://localhost:9870/explorer.html
+查看
+
 
 
 
