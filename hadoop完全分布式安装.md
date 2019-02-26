@@ -5,18 +5,20 @@
 虚拟机采用桥接的方式，最好安装界面，问题少。
 -------------------------------------------------------------------------------------
 # 1. 设置hostname
-	node1：
+  node1：
   ```
   hostnamectl set-hostname node1
   ```
+  node2：
   ```
-	node2：hostnamectl set-hostname node2
+  hostnamectl set-hostname node2
   ```
+  node3:
   ```
-	node3：hostnamectl set-hostname node3
+  hostnamectl set-hostname node3
   ```
 # 2. 设置hosts文件
-	vim /etc/hosts，三台机器都配置成一样。
+  vim /etc/hosts，三台机器都配置成一样。
 	
   ```
 	192.168.1.7 node1
