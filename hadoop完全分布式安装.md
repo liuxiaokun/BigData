@@ -27,13 +27,13 @@
   ```
 	
 # 3. 免密登陆. node1免密登录node2，node3
-	node1：
+  node1：
   ```
   ssh-keygen
   ```
   一路回车。
   node1：
-	```
+  ```
   ssh-copy-id -i ~/.ssh/id_rsa.pub node2
   ```
   然后输入密码。
@@ -41,7 +41,7 @@
 	node1：ssh-copy-id -i ~/.ssh/id_rsa.pub node3  然后输入密码。
   ```
 	
-	验证：node1：
+  验证：node1：
   ```
   ssh node2
   ```
